@@ -1,0 +1,36 @@
+version: 2
+
+project_name: hftch
+
+before:
+  hooks:
+    - go mod tidy
+
+builds:
+  - id: hftch
+    main: .
+    binary: hftch
+
+    goos:
+      - windows
+      - linux
+
+    goarch:
+      - amd64
+      - arm64
+
+archives:
+  - formats:
+      - tar.gz
+    format_overrides:
+      - goos: windows
+        formats:
+          - zip
+
+checksum:
+  name_template: "checksums.txt"
+
+release:
+  github:
+    owner: henristr
+    name: hftch
